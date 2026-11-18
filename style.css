@@ -17,7 +17,7 @@ body {
 .vie {
     height: 100%;
     width: 100%;
-    background: #4caf50;
+    background: #e53935;
     transition: width 0.3s;
 }
 
