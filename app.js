@@ -11,16 +11,27 @@ let jeuEnCours = true;
 
 /* ===== LES ÉLÉMENTS DE LA PAGE ===== */
 
+const historique = []; 
+
 const textePvJoueur = document.getElementById("pv-joueur");
 const textePvMonstre = document.getElementById("pv-monstre");
 const barreJoueur = document.getElementById("barre-joueur");
 const barreMonstre = document.getElementById("barre-monstre");
-const historique = []; 
+const boutonAttaque = document.getElementById("btn-attaque");
+const boutonSoin = document.getElementById("btn-soin");
+const boutonCritique = document.getElementById("btn-critique");
+const message = document.getElementById("message");
 const journal = document.getElementById("journal"); 
 /* ===== L'AFFICHAGE ===== */
 
 // Une fonction = un bloc de code qu'on peut lancer quand on veut.
 // Celle-ci met l'écran à jour avec les valeurs actuelles.
+afficherVie();
+
+function nombreAuHasard(min , max) { 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
 function afficherVie() {
     // On écrit les PV dans le texte
     textePvJoueur.textContent = pvJoueur;
@@ -30,18 +41,6 @@ function afficherVie() {
     // Exemple : 50 PV sur 100 → 50 / 100 * 100 = 50 %
     barreJoueur.style.width = (pvJoueur / PV_MAX_JOUEUR) * 100 + "%";
     barreMonstre.style.width = (pvMonstre / PV_MAX_MONSTRE) * 100 + "%";
-}
-
-// On l'appelle une fois au chargement de la page
-afficherVie();
-
-const boutonAttaque = document.getElementById("bts-attaque");
-const boutonSoin = document.getElementById("bts-soin");
-const message = document.getElementById("message");
-const boutonCritique = document.getElementById("btn-critique");
-
-function nombreAuHasard(min , max) { 
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
 
 function afficherJournal() {
@@ -60,33 +59,32 @@ function afficherJournal() {
 }
 
 function ajouterEvenement(texte) {
-    message.textContent = texte; 
+    ajouterEvenement = texte; 
     historique.push(texte);
-    afficherJournal();
 }
 
 function ripose() {
     const degats = nombreAuHasard(5, 12);
     pvJoueur = Math.max(0, pvJoueur - degats); 
-    message.textContent = "Le monstre riposte : -" + degats + " PV !"; 
+    ajouterEvenement("Le monstre riposte : -" + degats + " PV !"); 
 }
 
 function verifierFin() {
     if (pvMonstre <= 0) { 
-        message.textContent = " Victoire ! Le monstre est vaincu !";
+        ajouterEvenement(" Victoire ! Le monstre est vaincu !");
         jeuEnCours = false;
     } else if (pvJoueur <= 0) {
-        message.textContent = " Defaite ! Le héros est à terre.";
+        ajouterEvenement(" Defaite ! Le héros est à terre.");
         jeuEnCours = false;
     } if (pvJoueur < 30) {
-        message.textContent = " Attention, PV faible !";
+        ajouterEvenement(" Attention, PV faible !");
     } if (!jeuEnCours) {
         boutonAttaque.disabled = true; 
         boutonSoin.disabled= true; 
         boutonCritique.disabled= true;
     } 
-}
-
+} 
+ 
 function attaquer() { 
     if (!jeuEnCours) return; 
    
@@ -125,3 +123,5 @@ function coupCritique() {
 boutonAttaque.addEventListener("click", attaquer);
 boutonSoin.addEventListener("click", soigner); 
 boutonCritique.addEventListener("click", coupCritique);
+
+afficherVie(); 
