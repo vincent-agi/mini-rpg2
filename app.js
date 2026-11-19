@@ -61,9 +61,10 @@ function afficherJournal() {
 function ajouterEvenement(texte) {
     ajouterEvenement = texte; 
     historique.push(texte);
+    afficherJournal();
 }
 
-function ripose() {
+function riposte() {
     const degats = nombreAuHasard(5, 12);
     pvJoueur = Math.max(0, pvJoueur - degats); 
     ajouterEvenement("Le monstre riposte : -" + degats + " PV !"); 
