@@ -2,7 +2,7 @@
 
 // Valeurs fixes : on ne les modifie jamais
 const PV_MAX_JOUEUR = 100;
-const PV_MAX_MONSTRE = 80;
+const PV_MAX_MONSTRE = 300;
 
 // Valeurs qui vont changer pendant le combat
 let pvJoueur = PV_MAX_JOUEUR;
