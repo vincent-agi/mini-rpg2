@@ -66,12 +66,18 @@ function verifierFin() {
 
     
 function attaquer() { 
+    if (!jeuEnCours) return; 
+   
     const degats = nombreAuHasard(10, 20); 
     pvMonstre = Math.max(0, pvMonstre - degats); 
     console.log("Tu infliges " + degats + " dégâts. ");
 
-    riposte(); 
-    afficherVie(); 
+    verifierFin();
+    if (jeuEnCours) {
+        riposte();
+        afficherVie();
+    }
+    afficherVie();
 } 
 
 function soigner () { 
