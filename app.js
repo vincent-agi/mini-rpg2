@@ -47,7 +47,7 @@ function ripose() {
     message.textContent = "Le monstre riposte : -" + degats + " PV !"; 
 }
 
-function attaque() { 
+function attaquer() { 
     const degats = nombreAuHasard(10, 20); 
     pvMonstre = Math.max(0, pvMonstre - degats); 
     console.log("Tu infliges " + degats + " dégâts. ");
@@ -55,3 +55,18 @@ function attaque() {
     riposte(); 
     afficherVie(); 
 } 
+
+function soigner () { 
+    pvJoueur = Math.min(PV_MAX_JOUEUR, pvJoueur + 15);
+    console.log("Tu récupères des PV.");
+
+    riposte();
+    afficherVie();
+}
+
+function coupCritique() {
+    
+}
+
+boutonAttaque.addEventListener("click", attaquer);
+boutonSoin.addEventListener("click", soigner); 
