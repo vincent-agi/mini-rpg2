@@ -32,3 +32,7 @@ function afficherVie() {
 
 // On l'appelle une fois au chargement de la page
 afficherVie();
+
+const boutonAttaque = document.getElementById("bts-attaque");
+const boutonSoin = document.getElementById("bts-soin");
+const message = document.getElementById("message");
