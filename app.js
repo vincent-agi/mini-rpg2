@@ -15,7 +15,8 @@ const textePvJoueur = document.getElementById("pv-joueur");
 const textePvMonstre = document.getElementById("pv-monstre");
 const barreJoueur = document.getElementById("barre-joueur");
 const barreMonstre = document.getElementById("barre-monstre");
-
+const historique = []; 
+const journal = document.getElementById("journal"); 
 /* ===== L'AFFICHAGE ===== */
 
 // Une fonction = un bloc de code qu'on peut lancer quand on veut.
