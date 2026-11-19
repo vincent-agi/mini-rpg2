@@ -18,14 +18,8 @@ class personnage {
 }
 
 /* ===== L'ÉTAT DU JEU ===== */     
-
-// Valeurs fixes : on ne les modifie jamais
-const PV_MAX_JOUEUR = 100;
-const PV_MAX_MONSTRE = 300;
-
-// Valeurs qui vont changer pendant le combat
-let pvJoueur = PV_MAX_JOUEUR;
-let pvMonstre = PV_MAX_MONSTRE;
+const joueur = new personnage("Héros", 100);
+const monstre = new personnage("Monstre", 300);
 let jeuEnCours = true; 
 
 /* ===== LES ÉLÉMENTS DE LA PAGE ===== */
@@ -53,13 +47,13 @@ function nombreAuHasard(min , max) {
 
 function afficherVie() {
     // On écrit les PV dans le texte
-    textePvJoueur.textContent = pvJoueur;
-    textePvMonstre.textContent = pvMonstre;
+    textePvJoueur.textContent = joueur.pv;
+    textePvMonstre.textContent = monstre.pv;
 
     // On règle la largeur des barres en pourcentage.
     // Exemple : 50 PV sur 100 → 50 / 100 * 100 = 50 %
-    barreJoueur.style.width = (pvJoueur / PV_MAX_JOUEUR) * 100 + "%";
-    barreMonstre.style.width = (pvMonstre / PV_MAX_MONSTRE) * 100 + "%";
+    barreJoueur.style.width = (joueur.pv / joueur.pvMax) * 100 + "%";
+    barreMonstre.style.width = (monstre.pv / monstre.pvMax) * 100 + "%";
 }
 
 function afficherJournal() {
@@ -85,12 +79,12 @@ function ajouterEvenement(texte) {
 
 function riposte() {
     const degats = nombreAuHasard(5, 12);
-    pvJoueur = Math.max(0, pvJoueur - degats); 
+    joueur.recevoirDegats(degats);
     ajouterEvenement("Le monstre riposte : -" + degats + " PV !"); 
 }
 
 function verifierFin() {
-    if (pvMonstre <= 0) { 
+    if (monstre.estVaincu()) { 
         ajouterEvenement(" Victoire ! Le monstre est vaincu !");
         jeuEnCours = false;
     } else if (pvJoueur <= 0) {
