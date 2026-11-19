@@ -1,4 +1,23 @@
-/* ===== L'ÉTAT DU JEU ===== */
+class personnage {
+    constructor(nom, pvMax) {
+        this.nom = nom;
+        this.pvMax= pvMax;
+        this.pv = pvMax; 
+    }
+    recevoirDegats(degats) {
+        this.pv = Math.max(0, this.pv - degats);
+    }
+
+    recevoirSoin(montant) {
+        this.pv = Math.min(this.pvMax, this.pv + montant);
+    }
+
+    estVaincu() {
+        return this.pv <= 0;
+    }  
+}
+
+/* ===== L'ÉTAT DU JEU ===== */     
 
 // Valeurs fixes : on ne les modifie jamais
 const PV_MAX_JOUEUR = 100;
