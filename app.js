@@ -75,7 +75,7 @@ function attaquer() {
     verifierFin();
     if (jeuEnCours) {
         riposte();
-        afficherVie();
+        verifierFin();
     }
     afficherVie();
 } 
