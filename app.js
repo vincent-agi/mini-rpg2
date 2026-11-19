@@ -56,8 +56,9 @@ function verifierFin() {
     } else if (pvJoueur <= 0) {
         message.textContent = " Defaite ! Le héros est à terre.";
         jeuEnCours = false;
-    }
-    if (!jeuEnCours) {
+    } if (pvJoueur < 30) {
+        message.textContent = " Attention, PV faible !";
+    } if (!jeuEnCours) {
         boutonAttaque.disabled = true; 
         boutonSoin.disabled= true; 
         boutonCritique.disabled= true;
@@ -81,10 +82,13 @@ function attaquer() {
 } 
 
 function soigner () { 
+    if (!jeuEnCours) return;
+    
     pvJoueur = Math.min(PV_MAX_JOUEUR, pvJoueur + 15);
-    console.log("Tu récupères des PV.");
+    console.log("Tu récupères 15 PV.");
 
     riposte();
+    verifierFin();
     afficherVie();
 }
 
