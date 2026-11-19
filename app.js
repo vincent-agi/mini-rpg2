@@ -36,3 +36,22 @@ afficherVie();
 const boutonAttaque = document.getElementById("bts-attaque");
 const boutonSoin = document.getElementById("bts-soin");
 const message = document.getElementById("message");
+
+function nombreAuHasard(min , max) { 
+    return Math.floor(math.randome() * (max - min + 1)) + min; 
+}
+
+function ripose() {
+    const degats = nombreAuHasard(5, 12);
+    pvJoueur = Math.max(0, pvJoueur - degats); 
+    message.textContent = "Le monstre riposte : -" + degats + " PV !"; 
+}
+
+function attaque() { 
+    const degats = nombreAuHasard(10, 20); 
+    pvMonstre = Math.max(0, pvMonstre - degats); 
+    console.log("Tu infliges " + degats + " dégâts. ");
+
+    riposte(); 
+    afficherVie(); 
+} 
