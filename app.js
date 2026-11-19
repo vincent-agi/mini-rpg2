@@ -7,6 +7,7 @@ const PV_MAX_MONSTRE = 80;
 // Valeurs qui vont changer pendant le combat
 let pvJoueur = PV_MAX_JOUEUR;
 let pvMonstre = PV_MAX_MONSTRE;
+let jeuEnCours = true; 
 
 /* ===== LES ÉLÉMENTS DE LA PAGE ===== */
 
@@ -48,6 +49,22 @@ function ripose() {
     message.textContent = "Le monstre riposte : -" + degats + " PV !"; 
 }
 
+function verifierFin() {
+    if (pvMonstre <= 0) { 
+        message.textContent = " Victoire ! Le monstre est vaincu !";
+        jeuEnCours = false;
+    } else if (pvJoueur <= 0) {
+        message.textContent = " Defaite ! Le héros est à terre.";
+        jeuEnCours = false;
+    }
+    if (!jeuEnCours) {
+        boutonAttaque.disabled = true; 
+        boutonSoin.disabled= true; 
+        boutonCritique.disabled= true;
+    } 
+}
+
+    
 function attaquer() { 
     const degats = nombreAuHasard(10, 20); 
     pvMonstre = Math.max(0, pvMonstre - degats); 
