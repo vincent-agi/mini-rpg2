@@ -41,7 +41,22 @@ const message = document.getElementById("message");
 const boutonCritique = document.getElementById("btn-critique");
 
 function nombreAuHasard(min , max) { 
-    return Math.floor(math.randome() * (max - min + 1)) + min; 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
+function afficherJournal() {
+    journal.innerHTML = "";
+
+    let debut = historique.length - 5;
+    if (debut < 0) {
+        debut = 0;
+    }
+
+    for (let i = debut; i < historique.length; i++) {
+        const ligne = document.createElement("li");
+        ligne.textContent = historique[i];
+        journal.appendChild(ligne);
+    }
 }
 
 function ripose() {
@@ -66,7 +81,6 @@ function verifierFin() {
     } 
 }
 
-    
 function attaquer() { 
     if (!jeuEnCours) return; 
    
@@ -94,7 +108,7 @@ function soigner () {
 }
 
 function coupCritique() {
-    const degats = degats(30);
+    const degats = nombreAuHasard(15, 30);
     pvMonstre = Math.max(0, pvMonstre - degats);
     console.log("Tu infliges un coup critique"); 
     
