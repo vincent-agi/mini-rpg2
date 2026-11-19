@@ -59,7 +59,7 @@ function afficherJournal() {
 }
 
 function ajouterEvenement(texte) {
-    ajouterEvenement = texte; 
+    message.textContent = texte; 
     historique.push(texte);
     afficherJournal();
 }
