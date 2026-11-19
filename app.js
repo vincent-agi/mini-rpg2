@@ -59,6 +59,12 @@ function afficherJournal() {
     }
 }
 
+function ajouterEvenement(texte) {
+    message.textContent = texte; 
+    historique.push(texte);
+    afficherJournal();
+}
+
 function ripose() {
     const degats = nombreAuHasard(5, 12);
     pvJoueur = Math.max(0, pvJoueur - degats); 
