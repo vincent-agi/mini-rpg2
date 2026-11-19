@@ -36,6 +36,7 @@ afficherVie();
 const boutonAttaque = document.getElementById("bts-attaque");
 const boutonSoin = document.getElementById("bts-soin");
 const message = document.getElementById("message");
+const boutonCritique = document.getElementById("btn-critique");
 
 function nombreAuHasard(min , max) { 
     return Math.floor(math.randome() * (max - min + 1)) + min; 
@@ -65,8 +66,14 @@ function soigner () {
 }
 
 function coupCritique() {
+    const degats = degats(30);
+    pvMonstre = Math.max(0, pvMonstre - degats);
+    console.log("Tu infliges un coup critique"); 
     
+    riposte();
+    afficherVie();
 }
 
 boutonAttaque.addEventListener("click", attaquer);
 boutonSoin.addEventListener("click", soigner); 
+boutonCritique.addEventListener("click", coupCritique);
